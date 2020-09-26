@@ -1,0 +1,144 @@
+Array
+    -> It is the collection of similar Data elements.
+    -> Declarating and storing of an array -
+        int arr[5]; /* 5 blocks of memory is allocated starting from 0 to 4 */
+        arr[0] = 25;
+        int arr2[3] = {1,6,9}
+    -> Main memory is divided into - Heap, Stack and code section.
+    -> When an array is declared, it is stored in the stack memory.
+    -> A loop can be used to print the contents of an array
+        for(int i = 0; i<3; i++)
+        {
+            printf("%d",arr2[i]);
+        }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Structure
+    -> It is a collection of data members where all the related data members come under one name. The data members can be of similar type or dissimilar type.
+    -> Structure is used for defining user defined data types.
+    -> Declaring and accessing of an Structure
+        struct Rectangle
+        {
+            /* assuming integer takes 2 bytes, the whole structure will take 4 bytes */
+            int length;
+            int breadth;
+        };
+        /* The memory is not consumed because its just a definition */
+        int main()
+        {
+            struct Rectangle r; /* This is the declaration of structure. Now r occupies 4 */
+            struct Rectangle r = {5,2}; /* To declare and initialise structure */
+            /* The memory is now allocated in the stack */
+            r.length = 15; /* To access a member we use .(dot) operator */
+            r.breadth  = 10;
+            printf("Area of rectangle is %d",(r.length*r.breadth));
+        }
+    -> Examples of using structure
+        1.Complex numbers (a+ib)
+            struct Complex
+            {
+                /* space = 2 + 2 = 4 bytes
+                int real;
+                int img;
+            };
+        2. Student record
+            struct Student
+            {
+                /* space = 2 + 25 + 10 + 50 = 77 bytes */
+                int roll;
+                char name[25];
+                char dept[10];
+                char address[50];
+                int age;
+            };
+            int main()
+            {
+                /* space = 77 * 10 = 770 bytes */
+                struct Student s[10]; /* array of structures is declared */
+                s[0].age = 17;
+                printf("%d",s[0].age);
+            }
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Pointers
+    -> Pointer is an address variable that is meant for storing address of data.
+    -> Pointers can be used for accessing the data indirectly.
+    -> A program can access the stack and code section of the memory directly while the heap cant be accessed directly. 
+    -> The need for pointers -
+        * So to access heap memory we use pointers.
+        * To access external files and resources outside the program
+        * Used for passing parameters
+    -> Every variable created in C is stored in stack memory.
+    -> To allocate memory in heap, we use malloc(). To use this function, we import a library #include<stdlib.h>
+    -> malloc() takes in the amount of size required in the heap memory. It is given in bytes.
+    -> Declaring and accessing of a pointer -
+        1. Accessing stack memory
+            int main()
+            {
+                int a = 10; /* data variable, Since the variable is 2 bytes, it has 2 address */
+                int *p; /* address variable, a pointer also occupies memory of 2 bytes and has 2 address*/
+                /* Consider the address of a variable as 200/201 and address of p pointer as 210/211 */
+            
+                p = &a; /* initialise of pointer */
+                /* The pointer stores the address of a i.e 200/201 */
+
+                printf("%d",a); /* prints 10 */
+                printf("%d", *p); /* prints 10, the portion with *p is dereferencing*
+            }
+        2. Accessing Heap memory
+            #include<stdlib.h>
+            int main()
+            {
+                int *p;
+                p = (int *)malloc(5*sizeOf(int)); /* Now 5*2(assuming) = 10 bytes is allocated to the heap memory */ 
+                /* Since the malloc function returns void pointer, we type cast it to integer pointer */
+                /* In C++, we use new keyword to allocate memory in heap
+                    p = new int[5];
+                */
+            }
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Reference(Only available in C++)
+    ->It is an alias given to the variable. The address of reference is same as that of the variable it is refering
+    -> Example
+        int main()
+        {
+            int a = 10; // Stored in stack memory
+            int &r = a; // A reference is defined by &(ampersand)
+            cout<<a; // prints 10;
+            r++;
+            cout<<a; // prints 11;
+            cout<<r; // prints 11;
+        }
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Pointer to a Structure
+    -> Example 1 (Stack)
+        struct Rectangle
+        {
+            int length;
+            int breadth;
+        };
+        int main()
+        {
+            struct Rectangle r = {10,5};
+            struct Rectangle *p = &r;/* The size of the pointer is equal to the interger. Its always 2 bytes condsidering integer to be 2 bytes. */
+            r.length = 20;
+            (*p).length = 10; /* The higher precedence is for .(dot) operator, so we wrap *p */
+            /* The alternative to the above statement.
+            p->length = 20;
+        }
+    -> Example (heap - dynamically)
+        struct Rectangle
+        {
+            int length;
+            int breadth;
+        };
+        int main()
+        {
+            struct Rectangle *p;
+            p = (struct Rectangle *) malloc(sizeof(struct Rectangle));
+            /* Since malloc returns void pointer, we type cast it as a Rectangle type structure pointer */
+            p->length = 14;
+            p->breadth = 6;
+        }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Functions
+    ->
