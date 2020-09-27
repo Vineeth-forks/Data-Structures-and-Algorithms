@@ -141,4 +141,298 @@ Pointer to a Structure
         }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Functions
-    ->
+    -> It is a group is instructions to perform a task. Functions help to break down into smaller modules. This helps in reusability
+    -> Using functions and integrating into main function is called modular programming.
+    -> Parameter passing methods -
+        * Pass by value
+        * Pass by address
+        * Pass by reference(C++, not in C)
+    -> Example of pass by value
+        void swap(int x, int y) /* Formal parameters */
+        {
+            x = x + y;
+            y = x - y;
+            x = x - y; 
+        }
+        int main()
+        {
+            int a,b;
+            a = 10;
+            b = 20;
+            swap(a,b); /* actual parameters */
+            printf("%d %d", a,b);
+        }
+        /* In this the actual parameters are not changed */
+    -> Example of pass by address
+        void swap(int *x, int *y) /* Formal parameters */
+        {
+            *x = *x + *y;
+            *y = *x - *y;
+            *x = *x - *y; 
+        }
+        int main()
+        {
+            int a,b;
+            a = 10;
+            b = 20;
+            swap(&a,&b); /* actual parameters */
+            printf("%d %d", a,b);
+        }
+        /* In this actual parameters are changed */
+    -> Example of pass by reference
+        void swap(int &x, int &y) /* Formal parameters */
+        {
+            x = x + y;
+            y = x - y;
+            x = x - y; 
+        }
+        int main()
+        {
+            int a,b;
+            a = 10;
+            b = 20;
+            swap(a,b); /* actual parameters */
+            printf("%d %d", a,b);
+        }
+        /* In this actual parameters are changed */
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Array as parameter
+    -> Example for passing an array
+        void output(int arr[], int n)
+        {
+            for(int i = 0;i<n;i++)
+                printf("%d",arr[i]);
+        }
+        int main()
+        {
+            int arr[5] = {1,2,4,5,7};
+            output(arr,5);
+        }
+        /* Array is passed only by address and cant be passed by value */
+    -> Example for returning an array
+        int[] output(int n)
+        {
+            int *p;
+            p = (int *)malloc(n*sizeof(int));
+            return (p);
+        }
+        int main()
+        {
+            int *arr;
+            arr = output(5);
+        }
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Structure as parameter
+    -> Example
+        struct rectangle
+        {
+            int length;
+            int breadth;
+        };
+        int area(struct rectangle r1)
+        {
+            r1.length++; /* This doesnt affect the actual parameters value
+            return (r1.length*r1.breadth);
+        }
+        int main()
+        {
+            struct rectangle r = {20,23};
+            printf("%d",area(r));
+        }
+    -> Example by reference
+        struct rectangle
+        {
+            int length;
+            int breadth;
+        };
+        int changeLength(struct rectangle &r1)
+        {
+            r1.length++; /* This does affect the actual parameters value since this is reference */
+            return (r1.length);
+        }
+        int main()
+        {
+            struct rectangle r = {20,23};
+            printf("%d",changeLength(r));
+        }
+    -> Example by address
+        struct rectangle
+        {
+            int length;
+            int breadth;
+        };
+        int changeLength(struct rectangle *p)
+        {
+            p->length++; /* This doesnt affect the actual parameters value
+            return (p->length);
+        }
+        int main()
+        {
+            struct rectangle r = {20,23};
+            printf("%d",changeLength(&r));
+        }
+    /* An array cant be passed by value but a structure containing an array can be passed by value by passing the structure */
+    -> Example
+        struct Arr
+        {
+            int arr[5];
+            int n;
+        };
+        void test(struct Arr a1) /* A new memory is allocated and changes made is independent of formal parameters */
+        {
+            ...
+        }
+        int main()
+        {
+            struct Arr a = {{5,4,3,4,6},5};
+            test(a);
+        }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Structure and Functions
+    -> Example
+        struct rectangle
+        {
+            int length;
+            int breadth;
+        };
+        void initialise(struct rectangle *r,int l,int b)
+        {
+            (*r).length = l;
+            r->breadth = b;
+        }
+        void area(struct rectangle r)
+        {
+            r->length*r->breadth;
+        }
+        void changeLength(struct rectangle *r, int l)
+        {
+            r->length = l;
+        }
+        int main()
+        {
+            struct rectangle r;
+            initialise(&r,10,5);
+            area(r);
+            changeLength(&r,15);
+        }
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Changing C program to C++
+    ->Example from the last one
+       class Rectangle
+        {
+            private:
+                int length;
+                int breadth;
+        Rectangle(int l,int b) // Constructor is used to initialise the object
+        {
+            length = l;
+            breadth = b;
+        }
+        void area()
+        {
+            length*breadth;
+        }
+        void changeLength(int l)
+        {
+            length = l;
+        }
+        int main()
+        {
+            Rectangle r(10,5);
+            r.area();
+            r.changeLength(15);
+        }
+        }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+class and constructor(C++)
+    -> Example
+        #include<iostream>
+        using namespace std;
+
+        class Rectangle
+        {
+            private:
+                int length;
+                int breadth;
+            public:
+                // Constructor overloading
+                Rectangle(){
+                    length = 4;
+                    breadth = 5;
+                }
+                Rectangle(int l, int b); // prototype or a signature of a function
+                int area();
+                int perimeter();
+                int getLength(){ return length;}
+                void changeLength(int l){ length = l;}
+                // Destructor
+                ~Rectangle();
+        };
+        Rectangle::Rectangle(int l,int b)
+        {
+            length = l;
+        }
+        int Rectangle::area()
+        {
+            return length*breadth;
+        }
+        int Rectangle::perimeter()
+        {
+            return 2*(length+breadth);
+        }
+        Rectangle::~Rectangle()
+        {
+
+        }
+        int main()
+        {
+            Rectangle r(10,5);
+            cout<<r.area;
+            cout<<r.perimeter;
+            r.changeLength(15);
+            cout<<r.getLength;
+        }
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Template class(C++)
+    -> Generic class is created to operate on any type of data using Template
+    -> Example
+        template <class T>
+        class Arithmetic
+        {
+            private:
+                T a;
+                T b;
+            public:
+                Arithmetic(T a, T b);
+                T add();
+                T sub();
+        };
+
+        template <class T>
+        Arithmetic<T>::Arithmetic(T a,T b)
+        {
+            this->a=a; // this points to the object
+            this->b=b;
+        }
+        template <class T>
+        T Arithmetic<T>::add()
+        {
+            T c;
+            c = a+b;
+            return c;
+        }
+        T template <class T>
+        Arithmetic<T>::sub()
+        {
+            T c;
+            c = a-b;
+            return c;
+        }
+        int main()
+        {
+            Arithmetic<int> ar(10,5);
+            cout<<ar.add();
+            Arithmetic<float> ar(13.4,4.4);
+            cout<<arr.sub();
+        }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
