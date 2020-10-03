@@ -60,7 +60,7 @@ Structure
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Pointers
-    -> Pointer is an address variable that is meant for storing address of data.
+    -> Pointer is an address variable that is meant for storing address of data variable.
     -> Pointers can be used for accessing the data indirectly.
     -> A program can access the stack and code section of the memory directly while the heap cant be accessed directly. 
     -> The need for pointers -
