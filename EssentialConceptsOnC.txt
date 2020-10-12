@@ -3,7 +3,7 @@ Array
     -> Declarating and storing of an array -
         int arr[5]; /* 5 blocks of memory is allocated starting from 0 to 4 */
         arr[0] = 25;
-        int arr2[3] = {1,6,9}
+        int arr2[] = {1,6,9}
     -> Main memory is divided into - Heap, Stack and code section.
     -> When an array is declared, it is stored in the stack memory.
     -> A loop can be used to print the contents of an array
@@ -122,7 +122,7 @@ Pointer to a Structure
             struct Rectangle *p = &r;/* The size of the pointer is equal to the interger. Its always 2 bytes condsidering integer to be 2 bytes. */
             r.length = 20;
             (*p).length = 10; /* The higher precedence is for .(dot) operator, so we wrap *p */
-            /* The alternative to the above statement.
+            /* The alternative to the above statement. */
             p->length = 20;
         }
     -> Example (heap - dynamically)
@@ -263,7 +263,7 @@ Structure as parameter
         };
         int changeLength(struct rectangle *p)
         {
-            p->length++; /* This doesnt affect the actual parameters value
+            p->length++; /* This does affect the actual parameters value
             return (p->length);
         }
         int main()
