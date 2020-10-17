@@ -1,14 +1,14 @@
 Introduction to data Structures
     -> Data structures is a collection of data items so that they can utilize operations on data effectively.
     -> The effective operations on data items are done inside the main memory.
-    -> Data base is the arragement of data like a relational model in the HDD storage.
+    -> Data base is the arrangement of data like a relational model in the HDD storage.
     -> Data warehouse contains large amount of legacy data (historical data) stored.
-    -> Storing and utilizing the abundent data to study is big data.
+    -> Storing and utilizing the abundant data to study is Big Data.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Stack vs Heap memory
     -> The main memory is divided into smaller parts called segments.
     -> The main memory contains linear addresses.
-    -> The main memory is divided into - Heap, stack and code section
+    -> The main memory is divided into - Heap, stack and code section.
     -> The variables defined in a function is stored in the stack and the portion of this memory given to the function is called as activation record of the function. This is static memory allocation.
     -> Since the amount of bytes required to store is decided during the compile time, it is called static memory allocation.
     -> Check out why stack memory is called "stack"?
@@ -56,4 +56,3 @@ Time and Space complexity
         * For swapping, it is O(1)
     -> The Time taken by the function1 which in turn is calling a function2 will be the time taken by the function.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
