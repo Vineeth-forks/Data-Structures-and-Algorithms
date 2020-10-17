@@ -34,10 +34,19 @@ int power(int n, int p)
         return 1;
     }
 }
+
+int fib(int n)
+{
+    if(n<=1)
+        return n;
+
+    return fib(n-1)+fib(n-2);
+}
 int main()
 {
     printf("%d\n",sum(5));
     printf("%d\n",fact(4));
     printf("%d\n",power(2, 3));
+    printf("%d\n",fib(15));
     return 0;
 }
