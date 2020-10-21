@@ -1,7 +1,7 @@
 Introduction to data Structures
     -> Data structures is a collection of data items so that they can utilize operations on data effectively.
     -> The effective operations on data items are done inside the main memory.
-    -> Data base is the arragement of data like a relational model in the HDD storage.
+    -> Data base is the arrangement of data like a relational model in the HDD storage.
     -> Data warehouse contains large amount of legacy data (historical data) stored.
     -> Storing and utilizing the abundent data to study is big data.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
