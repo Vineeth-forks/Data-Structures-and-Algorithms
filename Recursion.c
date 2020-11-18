@@ -72,6 +72,15 @@ int func5(int n)
         return func5(func5(n+11));
     }
 }
+
+int fact(int n)
+{
+    if(n<=1)
+        return 1;
+
+    return n*fact(n-1);
+}
+
 int main() 
 {
     func(3);
@@ -84,5 +93,6 @@ int main()
     funcA(20);
     printf("\n");
     func5(95);
+    printf("%d",fact(10));
     return 0;
 }
