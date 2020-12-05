@@ -115,6 +115,37 @@ void insertion(struct Node *p,int index,int data)
     }
 }
 
+// Inserting a node in a sorted linked list
+void sortInsertion(struct Node *p,int index,int data)
+{
+    struct Node *t,*q=NULL;
+    t=(struct Node *)malloc(sizeof(struct Node));
+    t->data=data;
+    t->next=NULL;
+    if(first=NULL)
+    {
+        first=t;
+    }
+    else
+    {
+        while(p&&p->data<data)
+        {
+            q=p;
+            p=p->next;
+        }
+        if(p==first)
+        {
+            t->next=first;
+            first = t;
+        }
+        else
+        {
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+}
+
 int main()
 {
     int A[] = {1,4,5,6,3,2,4};
