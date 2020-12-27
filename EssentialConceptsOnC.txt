@@ -26,7 +26,7 @@ Structure
         int main()
         {
             struct Rectangle r; /* This is the declaration of structure. Now r occupies 4 */
-            struct Rectangle r = {5,2}; /* To declare and initialise structure */
+            struct Rectangle r2 = {5,2}; /* To declare and initialise structure */
             /* The memory is now allocated in the stack */
             r.length = 15; /* To access a member we use .(dot) operator */
             r.breadth  = 10;
@@ -70,6 +70,29 @@ Pointers
     -> Every variable created in C is stored in stack memory.
     -> To allocate memory in heap, we use malloc(). To use this function, we import a library #include<stdlib.h>
     -> malloc() takes in the amount of size required in the heap memory. It is given in bytes.
+    -> Pointer can be used for dynamic memory allocation of a variable. Ex:
+            int *ptr;int n=1;
+            ptr = &n;
+    -> *(&n) is equivalent to n.
+    -> Postfix unary increment (++) and decrement (––) operators have greater precedence than the dereference operator (*).  Therefore, the expression *ptr++ is equivalent to *(ptr++).
+    -> Null pointer is a pointer variable that doesnt point to any memory location.
+            int *p = NULL;
+    -> A null pointer can also be declared by equating to 0. To make it clear, use 'NULL'.
+    -> Generic pointers or void pointers is a special pointer that can point to variables of any data type. Use it unless it is necassary.
+    -> In C, since you cannot have a variable of type void, the void pointer will therefore not point to any data and, thus, cannot be dereferenced. You need to cast a void pointer to another kind of pointer before using it.
+    ->  A double pointer stores the address of a another point, use * for each level of reference -
+        Example
+            int main()
+            {
+                int count = 1;
+                int *ptr,**ptr2,***ptr3;
+                ptr = &count;
+                ptr2 = &ptr;
+                ptr3 = &ptr2;
+                (***ptr3)++;
+                printf("%d %d %d",*ptr,**ptr2,***ptr3);// prints 2 2 2
+                return 0;
+            }
     -> Declaring and accessing of a pointer -
         1. Accessing stack memory
             int main()
@@ -94,7 +117,7 @@ Pointers
                 /* In C++, we use new keyword to allocate memory in heap
                     p = new int[5];
                 */
-            }
+            }   
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Reference(Only available in C++)
     ->It is an alias given to the variable. The address of reference is same as that of the variable it is refering
@@ -110,39 +133,44 @@ Reference(Only available in C++)
         }
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Pointer to a Structure
-    -> Example 1 (Stack)
-        struct Rectangle
-        {
-            int length;
-            int breadth;
-        };
-        int main()
-        {
-            struct Rectangle r = {10,5};
-            struct Rectangle *p = &r;/* The size of the pointer is equal to the interger. Its always 2 bytes condsidering integer to be 2 bytes. */
-            r.length = 20;
-            (*p).length = 10; /* The higher precedence is for .(dot) operator, so we wrap *p */
-            /* The alternative to the above statement is given below */
-            p->length = 20;
-        }
-    -> Example (heap - dynamically)
-        struct Rectangle
-        {
-            int length;
-            int breadth;
-        };
-        int main()
-        {
-            struct Rectangle *p;
-            p = (struct Rectangle *) malloc(sizeof(struct Rectangle));
-            /* Since malloc returns void pointer, we type cast it as a Rectangle type structure pointer */
-            p->length = 14;
-            p->breadth = 6;
-        }
+    ->  Example 1 (Stack)
+            struct Rectangle
+            {
+                int length;
+                int breadth;
+            };
+            int main()
+            {
+                struct Rectangle r = {10,5};
+                struct Rectangle *p = &r;/* The size of the pointer is equal to the integer. Its always 2 bytes condsidering integer to be 2 bytes. */
+                r.length = 20;
+                (*p).length = 10; /* The higher precedence is for .(dot) operator, so we wrap *p */
+                /* The alternative to the above statement is given below */
+                p->length = 20;
+            }
+    ->  Example (heap - dynamically)
+            struct Rectangle
+            {
+                int length;
+                int breadth;
+            };
+            int main()
+            { 
+                struct Rectangle *p;
+                p = (struct Rectangle *) malloc(sizeof(struct Rectangle));
+                /* Since malloc returns void pointer, we type cast it as a Rectangle type structure pointer */
+                p->length = 14;
+                p->breadth = 6;
+            }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Functions
-    -> It is a group is instructions to perform a task. Functions help to break down into smaller modules. This helps in reusability
+    -> It is a group is instructions to perform a task. Functions help to break down into smaller modules. This helps in reusability.
+    -> The execution begins from the main function.
+    -> Use a function declaration before using the function.
+        return_data_type function_name(data_type variable1, data_type variable2,..);
     -> Using functions and integrating into main function is called modular programming.
+    -> call by value: The values of the variables are passed by the calling function to the called function.Values of the variables in the calling functions remain unaffected when the arguments are passed using the call-by-value technique.
+    -> call by reference: The addresses of the variables are passed by the calling function to the called function. The function can change the value of the argument and the change is reflected in the calling function.
     -> Parameter passing methods -
         * Pass by value
         * Pass by address
@@ -436,3 +464,36 @@ Template class(C++)
             cout<<arr.sub();
         }
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Miscellaneous
+    -> Identifiers cant be of any special characters or punctuation marks apart from underscore '_'. Also there cant be two successive underscores.
+    -> In C by convention all keywords are written in lower case letters.
+    -> In the memory characters are all stored in memory by their ASCII values in binary format.
+    -> C supports four modifiers - two sign specifiers[signed and unsigned(positive only)] and two size specifiers(short and long).
+    -> To declare a constant, precede the normal variable with the const keyword and assign it to a value.
+    -> Some standard libraries
+        string.h : for string handling functions
+        stdlib.h : for some miscellaneous functions
+        stdio.h : for standardized input and output functions
+        math.h : for mathematical functions
+        alloc.h : for dynamic memory allocation
+        conio.h : for clearing the screen
+    -> The scanf function ignores any blank space, tabs and new lines entered by the user.
+    -> The prototype of the control string in scanf function can be given as,
+        %[*][width][modifier]type
+        example: %4d reads a four digit number of type integer 
+    -> In case of reading strings, we dont use the & sign in the scanf function.
+    -> The prototype of the control string in printf function can be given as,
+        %[flags][width][.precision][modifier]type
+    -> Modulus operator '%' can be used on integers only and cant be used on double or float values.
+    -> ++x is equivalent to x = x +1
+    -> y = x++ is equivalent to y = x;x = x + 1;
+    -> The expression x << y is equivalent to multiplication of x by 2y. And the expression x >> y is equivalent to division of x by 2y if x is unsigned or has a non-negative value.
+    -> sizeof is a unary operator used to calculate the size of a data type.
+    -> In case the statement block contains only one statement, putting curly brackets becomes optional.
+    -> Switch executes faster than if-else statements.
+    -> Do-while is the only iterative loop which checks condition after running the loop body.
+    -> On 32 bit systems, integer variable is allocated 4 bytes while on 16 bit systems it is allocated 2 bytes.
+    -> Equality operators have lower precedence than relational operators.
+    -> Among all the operators, comma operator has the lowest precedence.
+    -> The break statement is used to terminate the execution of the nearest enclosing loop in which it appears.
+    -> The continue statement skips the code following it and jumps to the next iteration of the nearest loop. For continue, a loop is required
