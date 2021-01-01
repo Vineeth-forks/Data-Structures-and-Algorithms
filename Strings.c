@@ -1,105 +1,51 @@
-#include <stdio.h>
+// To declare a character, it should be in single quotes.
+// To find the end of the string, one uses the string terminator '\0'.
+// For returning a string from a function use 'char*' as the return type.
+#include<stdio.h>
 
-void length()
+int count(char ch[])
 {
-    char name[] = "Weeknd";
-    int i = 0;
-    while(name[i]!='\0'){
-        i++;
-    }
-    printf("Length of the string %d",i);
+    int count=0;
+    while(ch[count]!='\0')
+        count++;
+    return count;
 }
-
-void charCase()
+char* caseInterchange(char ch[])
 {
-    char arr[] = "WkdSlLdIDld";
-    int i;
-    for(i=0;arr[i]!='\0';i++)
+    for(int i=0;ch[i]!='\0';i++)
     {
-        if(arr[i]>=65&&arr[i]<=90)
-        {
-            arr[i] += 32;
-        }
-        if(arr[i]>=97&&arr[i]<=122)
-        {
-            arr[i] -= 32;
-        }
-    }
+        if(ch[i]>=65 && ch[i]<=90)
+            ch[i] = ch[i] + 32;
+        else if(ch[i]>=97 && ch[i]<=122)
+            ch[i] = ch[i] - 32;
+        else{}
+    }   
+    return ch;
 }
-
-void vowelConsonant()
+int numberOfWords(char ch[])
 {
-    char arr[] = "Such is the time to do it";
-    int i;int vCounter = 0, cCounter = 0;
-    for(i = 0;arr[i]!='\0';i++)
-    {
-        if(arr[i]=='a'||arr[i]=='e'||arr[i]=='i'||arr[i]=='o'||arr[i]=='u'||arr[i]=='A'||arr[i]=='E'||arr[i]=='I'||arr[i]=='O'||arr[i]=='U')
-        {
-            vCounter++;
-        }
-        else if((arr[i]>=65&&arr[i]<=90)||(arr[i]>=97&&arr[i]<=122))
-        {
-            cCounter++;
-        }
-        else {}
-    }
-}
-
-void wordCounter()
-{
-    char arr[] = "Such is the time to do it";
-    int i;
     int wCounter = 1;
-    for(i= 0;arr[i]!='\0';i++)
+    for(int i=0;ch[i]!='\0';i++)
     {
-        if(arr[i]==' '&&arr[i-1]!=' ')
+        if(ch[i]==' ' && ch[i-1]!=' ')
             wCounter++;
     }
-
+    return wCounter;
 }
-
-void valid()
+char* reverse(char ch[])
 {
-    char arr[] = "asdfasdf324";
-    int valid = 1;
-    int i;
-    for(i= 0;arr[i]!='\0';i++)
-    {
-        if(!(arr[i]>=65&&arr[i]<=90)&&!(arr[i]>=97&&arr[i]<=122)&&!(arr[i]>=48&&arr[i]<=57))
-        {
-            valid = -1;
-        }
-    }
-}
-
-void reverse()
-{
-    char arr[] = "python";
-    int i,j;
+    int end = count(ch)-1;
     int temp;
-    for(i = 0;arr[i]!='\0';i++)
-    {}
-    i = i - 1;
-    for(j = 0;j<i;j++,i--)
+    for(int start=0;start<end;start++,end--)
     {
-        temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
+        temp = ch[start];
+        ch[start] = ch[end];
+        ch[end] = temp;
     }
-    printf("%s",arr);
+    return ch;
 }
-
-void duplicate()
+int main()
 {
-    char arr[] = "finding";
-    int H[26],i;
-    for(i=0;arr[i]!='\0';i++)
-    {
-        H[arr[i]-97] += 1; 
-    }
-    for(i=0;i<26;i++)
-    {
-        if(H[i]>1)
-            printf("%c %d",i+97,H[i]);
-    }
+    char name[] = "nam"; 
+    printf("%s",reverse(name));
 }
