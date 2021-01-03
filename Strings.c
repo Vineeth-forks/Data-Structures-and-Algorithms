@@ -44,8 +44,22 @@ char* reverse(char ch[])
     }
     return ch;
 }
+void duplicateChar(char ch[])
+{
+    int H[26];
+    for(int i=0; ch[i]!='\0'; i++)
+    {
+        H[ch[i]-97] += 1;
+    }
+    for(int i=0;i<26;i++)
+    {
+        if(H[i]>1)
+        {
+            printf("%c\t%d",i+97,H[i]);
+        }
+    }
+}
 int main()
 {
-    char name[] = "nam"; 
-    printf("%s",reverse(name));
+    
 }
