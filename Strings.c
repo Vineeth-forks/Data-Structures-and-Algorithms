@@ -59,7 +59,3 @@ void duplicateChar(char ch[])
         }
     }
 }
-int main()
-{
-    
-}
