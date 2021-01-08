@@ -185,3 +185,181 @@ void InsertSort(struct Node *p,int data)
         }
     }
 }
+
+// When a node is not in used it should be deleted or free-ed from the memory.
+
+// Deleting a node
+void deleteNode(struct Node *p,int pos)
+{
+    struct Node *q = NULL;
+    if(pos==1)
+    {
+        first = first->next;
+        free(p);
+    }
+    else if(pos>1)
+    {
+        for(int i = 0; i<pos-1 && p; i++)
+        {
+            q=p;
+            p = p->next;
+        }
+        if(p)
+        {
+            q->next = p->next;
+            free(p);
+        }
+        else
+        {
+            printf("Position doesnt exist");
+        }
+    }
+    else
+    {
+        printf("position cannot be zero or negative");
+    }
+}
+
+// To check if a linked list is sorted or not
+void sortOrNot(struct Node *p)
+{
+    while(p->next!=NULL)
+    {
+        if((p->data)>((p->next)->data))
+        {
+            printf("Not sorted");
+            return;
+        }
+        p = p->next;
+    }
+    printf("Sorted");
+}
+
+// To delete duplicate nodes in a sorted linked list
+void deleteDuplicate(struct Node *q)
+{
+    struct Node *p = q->next;
+    while (p!=NULL) 
+    {
+        if(q==p)
+        {
+            q->next = p->next;
+            free(p);
+            p = q->next;
+        }
+        else
+        {
+            q = p;
+            p = p->next;
+        }
+    }
+}
+
+// Reversing a linked list using a copy array
+void reverse(struct Node *p)
+{
+    int store[countNodes(p)];
+    int i = 0;
+    while(p!=NULL)
+    {
+        store[i] = p->data;
+        p = p->next;
+        i++;
+    }
+    p = first;
+    i--;
+    while(p!=NULL)
+    {
+        p->data = store[i];
+        p = p->next;
+        i--;
+    }
+}
+
+// Reversing a linked list through sliding pointers (preferred method)
+void reverseAlt(struct Node *p)
+{
+    struct Node *q,*r = NULL;
+    while(p!=NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
+// Concatenating two linked list
+void concate(struct Node *p,struct Node *q)
+{
+    while(p->next!=NULL)
+    {
+        p = p->next;
+    }
+    p->next = q;
+    free(q);
+} 
+
+// Merging two linked list in a sorted order
+void merge(struct Node *p,struct Node *q)
+{
+    struct Node *r,*pFirst = NULL;
+    if(p->data<q->data)
+    {
+        r = pFirst = p;
+        p = p->next;
+        r->next = NULL;
+    }
+    else
+    {
+        r = pFirst = q;
+        q = q->next;
+        r->next = NULL;
+    }
+    while(p&&q)
+    {
+        if(p->data<q->data)
+        {
+            r->next = p;
+            r = p;
+            p = p->next;
+            r->next = NULL;
+        }
+        else
+        {
+            r->next = q;
+            r = q;
+            q = q->next;
+            r->next = NULL;
+        }
+    }
+    if(p==NULL)
+    {
+        r->next = q;
+    }
+    else
+    {
+        r->next = p;
+    }
+}
+
+// To find whether a linked list is a loop or not
+void isLoop(struct Node *p)
+{
+    struct Node *q = p;
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q = q!=NULL?q->next:NULL;
+    }while(p&&q);
+    if(p==q)
+    {
+        printf("It is a loop");
+    }
+    else
+    {
+        printf("It is a linear linked list");
+    }
+}
