@@ -7,9 +7,16 @@
 #include <stdlib.h>
 struct Node
 {
-    int data;
-    struct Node *next; // self-referential structure
+    int data; // node data
+    struct Node *next; // self-referential structure and holds the address to the next node
 }*first = NULL;
+
+//Circular linked list
+struct CNode
+{
+    int data;
+    struct CNode *next;
+}*head=NULL;
 void singleNode()
 {
     struct Node *p;
@@ -361,5 +368,115 @@ void isLoop(struct Node *p)
     else
     {
         printf("It is a linear linked list");
+    }
+}
+
+// In a circular linked list there is no first node, we can assume a particular node to be a head(marked as a reference)
+
+// creating and displaying of a circular linked list
+void createC(int A[],int n)
+{
+    struct CNode *t,*last;
+    head=(struct CNode *)malloc(sizeof(struct CNode));
+    head->data=A[0];
+    head->next=head;
+    last=head;
+    for(int i=1;i<n;i++)
+    {
+        t=(struct CNode *)malloc(sizeof(struct CNode));
+        t->data=A[i];
+        t->next=last->next;
+        last->next=t;
+        last=t;
+    }
+}
+void displayCircular(struct CNode *t)
+{
+    do
+    {
+        printf("%d",t->data);
+        t=t->next;
+    }while(t!=head);
+}
+
+// length of the circular linked list
+int lengthCircular(struct CNode *t)
+{
+    int count=0;
+    do
+    {
+        count++;
+        t=t->next;
+    }while (t!=head);
+    return count;
+}
+
+// Insertion in a circular linked list
+void insertCircular(struct CNode *p,int pos,int data)
+{
+    struct CNode *t=NULL;
+    if(pos>lengthCircular(p))
+    {
+        return;
+    }
+    if(pos==0)
+    {
+        t=(struct CNode *)malloc(sizeof(struct CNode));
+        t->data=data;
+        if(head==NULL)
+        {
+            head=t;
+            head->next=head;
+        }
+        else
+        {
+            while(p->next!=head)
+                p=p->next;
+            p->next=t;
+            t->next=head;
+            head=t;
+        }
+    }
+    else
+    {
+        for(int i=0;i<pos-1;i++)
+            p=p->next;
+        t=(struct CNode *)malloc(sizeof(struct CNode));
+        t->data=data;
+        t->next=p->next;
+        p->next=t;
+    }
+}
+
+// Deletion of a node in a circular linked list
+void deleteCircular(struct CNode *p,int pos)
+{
+    struct CNode *q;
+    if(pos>lengthCircular(p))
+        return;
+    if(pos==0)
+    {
+        while(p->next!=head)
+            p=p->next;
+        if(head==p)
+        {
+            head=p;
+            head->next=head;
+        }
+        else
+        {
+            p->next=head->next;
+            free(head);
+            head=p->next;
+        }
+    }
+    else
+    {
+        for(int i=0;i<pos-2;i++)
+        p=p->next;
+        q=p->next;
+        p->next=q->next;
+        free(q);
+
     }
 }
