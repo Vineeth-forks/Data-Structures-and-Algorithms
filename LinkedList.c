@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+//Single linked list
 struct Node
 {
     int data; // node data
@@ -17,6 +18,14 @@ struct CNode
     int data;
     struct CNode *next;
 }*head=NULL;
+
+//Double linked list
+struct DNode
+{
+    int data;
+    struct DNode *prev;
+    struct DNode *next; 
+}*First=NULL;
 void singleNode()
 {
     struct Node *p;
@@ -478,5 +487,115 @@ void deleteCircular(struct CNode *p,int pos)
         p->next=q->next;
         free(q);
 
+    }
+}
+
+//Double linked list contains the address of both nodes i.e previous and next
+void createD(int A[],int n)
+{
+    struct DNode *t,*last;
+    First = (struct DNode *)malloc(sizeof(struct DNode));
+    First->data = A[0];
+    First->next=First->prev=NULL;
+    First=last;
+    for(int i=1; i<n; i++)
+    {
+        t = (struct DNode *)malloc(sizeof(struct DNode));
+        t->data = A[1];
+        t->next = last->next;
+        t->prev = last;
+        last->next=t;
+        last=t;
+    }
+}
+
+// printing a double linked list
+void displayDouble(struct DNode *t)
+{
+    while(t!=NULL)
+    {
+        printf("%d\t",t->data);
+    }
+}
+
+// length of a double linked list
+int lengthDouble(struct DNode *t)
+{
+    int count;
+    while(t)
+    {
+        count++;
+    }
+    return count;
+}
+
+// Insertion in a double linked list
+void insertDouble(struct DNode *p,int data,int pos)
+{
+    struct DNode *t;
+    if(pos<0||pos>lengthDouble(p))
+        return;
+    if(pos==0)
+    {
+        t = (struct DNode *)malloc(sizeof(struct DNode));
+        t->data = data;
+        t->prev = NULL;
+        t->next = First;
+        First->prev = t;
+        First=t;      
+    }
+    else
+    {
+        for(int i=0;i<pos-1;i++)
+        {
+            p = p->next;
+        }
+        t=(struct DNode *)malloc(sizeof(struct DNode));
+        t->data=data;
+        t->prev=p;
+        t->next=p->next;
+        if(p->next)
+            p->next->prev=t;
+        p->next=t;
+    }
+}
+
+//Deleting a node in a double linked list
+void deleteDouble(struct DNode *p,int pos)
+{
+    if(pos<0||pos>lengthDouble(p))
+        return;
+    if(pos==0)
+    {
+        First=First->next;
+        if(First)
+            First->prev=NULL;
+        free(p);
+    }
+    else
+    {
+        for(int i=0;i<pos-1;i++)
+        {
+            p=p->next;
+        }
+        p->prev->next=p->next;
+        if(p->next)
+            p->next->prev=p->prev;
+        free(p);
+    }
+}
+
+// Reversing a double linked list
+void Reverse(struct DNode *p)
+{
+    struct DNode *temp;
+    while(p!=NULL)
+    {
+        temp=p->next;
+        p->next=p->prev;
+        p->prev=temp;
+        p=p->prev;
+        if(p!=NULL && p->next==NULL)
+            First=p;
     }
 }
