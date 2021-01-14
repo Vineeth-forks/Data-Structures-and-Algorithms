@@ -87,9 +87,86 @@ int stackTop(struct StackArray st)
     printf("Stack underflow\n");
     return -1;
 }
-int main()
+
+// implementation of stack using linked list
+struct Node
 {
-    struct StackArray st;
-    createA(&st);
-    return 0;
+    int data;
+    struct Node *next;
+}*top=NULL;
+
+// checks if the stack is empty
+int isEmptyL()
+{
+    return top?0:1;
+}
+
+// A stack is full if the a memory is unable to create as the memory stack is full. The pointer will equate to NULL
+// checks if the stack is full
+int isFullL()
+{
+    struct Node *t=(struct Node *)malloc(sizeof(struct Node));
+    int x=t?1:0;
+    free(t);
+    return x;
+}
+
+// insertion in a stack
+void pushL(int data)
+{
+    struct Node *p =(struct Node *)malloc(sizeof(struct Node));
+    if(p==NULL)
+    {
+        printf("stack overflow\n");
+        return;
+    }
+    p->data=data;
+    p->next=top;
+    top=p;
+}
+
+// deletion in a stack
+int popL()
+{
+    int x;
+    struct Node *d=top;
+    if(top==NULL)
+    {
+        printf("stack is empty\n");
+        return -1;
+    }
+    top=top->next;
+    x=d->data;
+    free(d);
+    return x;
+}
+
+// prints the contents in a stack;
+void displayL()
+{
+    struct Node *t=top;
+    while(t!=NULL)
+    {
+        printf("%d\n",t->data);
+        t=t->next;
+    }
+}
+
+// returns the value corresponding to the index given
+int peekL(int index)
+{
+    struct Node *t=top;
+    for(int i=0;i<index-1&&t!=NULL;i++)
+        t=t->next;
+    if(t==NULL)
+        return -1;
+    return t->data;
+}
+
+// returns the topmost value in a stack
+int stackTopL()
+{
+    if(top)
+        return top->data;
+    return -1;
 }
