@@ -33,7 +33,7 @@ void singleNode()
     p->data = 10;
     p->next = NULL;
 }
-// When a pointer p is equated to another pointer q i.e p=q then the address the p is being copied to q.
+// When a pointer p is equated to another pointer q i.e p=q then the address the q is being copied to p.
 // q = p->next; this means q is pointing to the next node of p
 // p = p->next; this means p is pointing to the next node of p
 // if(p==NULL) or if(p==0) or if(!p) to check if a pointer is empty
