@@ -41,7 +41,7 @@ void insert(struct Array *arr)
     printf("Enter the index\n");
     scanf("%d",&index);
     printf("Enter the number\n");
-    scanf("&d",&num);
+    scanf("%d",&num);
     for(int i = arr->length;i<index;i--)
     {
         arr->A[i] = arr->A[i-1];
@@ -220,7 +220,7 @@ int main()
     printf("Press 8 to check if the array is sorted");
     printf("Press 9 to put all negative elements to the left");
     printf("Press 10 to merge two arrays sorted");
-    printf("Press -1 to exit");
+    printf("Press -1 to exit\n");
     scanf("%d",&choice);
     switch(choice)
     {

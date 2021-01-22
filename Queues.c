@@ -4,6 +4,7 @@
           -> Front pointer for deletion
           -> Rear pointer for insertion
     operations: enqueue(x),dequeue(), isEmpty(), isFull(), first(), last() */
+// In a queue, front is used for deletion and rear is used for deletion
 
 // Implementation of queues using array
 // While using a front pointer, it should point before the first element
@@ -171,3 +172,6 @@ void displayL(struct Node *t)
         t=t->next;
     }
 }
+
+// In double ended queue, insertion and deletion can be done by either from the front or the rear
+// A priority queue is a data structure in which each element is assigned a priority.  
